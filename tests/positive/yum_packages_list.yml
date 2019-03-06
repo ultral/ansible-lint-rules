@@ -1,0 +1,13 @@
+- name: playbook for checking yum module
+  hosts: localhost
+  gather_facts: True
+  tasks:
+    - name: install rpms
+      yum:
+        name:
+          - foo
+          - bar
+        state: present
+      retries: 10
+      register: pkg_install_result
+      until: pkg_install_result is success
