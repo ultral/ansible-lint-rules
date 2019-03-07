@@ -1,0 +1,12 @@
+- name: playbook for checking pip module
+  hosts: localhost
+  gather_facts: True
+  tasks:
+    - name: install pip modules
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - foo
+        - bar
+      register: pkg_install_result
+      until: pkg_install_result is success
